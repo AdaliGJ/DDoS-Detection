@@ -1,0 +1,6 @@
+Installed:
+
+django-cors-headers
+django
+djangorestframework
+pydantic
