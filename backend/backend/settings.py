@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'rest_framework',
     'corsheaders',
-    'user_api.apps.UserApiConfig'
+    'user_api.apps.UserApiConfig',
+    'packet_sniffer.apps.PacketSnifferConfig'
 ]
 
 MIDDLEWARE = [

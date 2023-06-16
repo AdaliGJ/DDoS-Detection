@@ -1,0 +1,8 @@
+<form method="post" action="{% url 'packet_sniffer' %}">
+    {% csrf_token %}
+    <button type="submit">Start Sniffing</button>
+</form>
+
+{% if status %}
+    <p>Status: {{ status }}</p>
+{% endif %}
