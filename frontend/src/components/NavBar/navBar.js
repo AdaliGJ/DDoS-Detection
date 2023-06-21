@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,9 +8,29 @@ import { ButtonGroup } from '@mui/material';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import './navBar.css'
 
+import axios from 'axios'
+import { useState, useEffect } from 'react';
+
+
 
 
 function NavBar() {
+
+const [session, setSession] = useState();
+
+  const client = axios.create({
+    baseURL: "http://127.0.0.1:8000"
+  });
+
+  useEffect(() => {
+    client.get("/api/user")
+    .then(function(res) {
+      setSession(true);
+    })
+    .catch(function(error) {
+      setSession(false);
+    });
+  }, []);
 
 
   return (
@@ -28,6 +48,7 @@ function NavBar() {
           >
             Detección DDoS
           </Typography>
+          {session?
           <ButtonGroup variant="contained" id="appbar_button">
             <Button class="navButton">Inicio</Button>
             <Button class="navButton" >Usuarios</Button>
@@ -35,7 +56,8 @@ function NavBar() {
             <Button class="navButton" >
                 <MeetingRoomIcon/>
             </Button >
-        </ButtonGroup>
+        </ButtonGroup>:
+        null}
         </Toolbar>
       </AppBar>
     </Box>
