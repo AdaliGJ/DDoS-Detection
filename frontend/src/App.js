@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 import Home from './components/Home/home';
 import Login from './components/Login/login';
+import NavBar from './components/NavBar/navBar';
 
 
 axios.defaults.xsrfCookieName = 'crsftoken';
@@ -33,14 +34,16 @@ function App() {
 
   return (
     <Router>
+
       <div className="App">
+        
         {session ? 
         <Switch> 
             <Route exact path="/home" component={Home}/>
             <Redirect path="/" to="/home"></Redirect>
           </Switch>:
           <Switch> 
-            <Route exact path="/login" component={Login}/>
+            <Route exact path="/login" component={Home}/>
             <Redirect path="/" to="/login"></Redirect>
           </Switch>}
       </div>

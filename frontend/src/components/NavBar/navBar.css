@@ -1,0 +1,49 @@
+#icon{
+    color: #0ab200;
+}
+
+#appbar_button{
+    
+    margin-right: 0vw;
+    margin-left: auto;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #230043;
+    float: none;
+}
+
+#appbar{
+    color: #ffffff;
+    background-color: #120e15;
+}
+
+.navButton {
+    color: #ffffff;
+    background-color: #120e15;
+    min-width: fit-content;
+    width: 10vw;
+    height: 6vh;
+    border-color: #230043;
+    border-width: 0.5px;
+    border-style: solid;
+}
+
+.navButton:hover {
+    cursor: pointer;
+}
+
+
+#appbar::-webkit-scrollbar {
+    display: none;
+  }
+
+#info_button, #home_button,  #news_button, #contact_button, #siout, #nolog{
+    color: #0ab200;
+    background-color: transparent;
+    border-color: #230043;
+    font-size: 0.8vw;
+}
+
+#noout, #silog{
+    display: none;
+}

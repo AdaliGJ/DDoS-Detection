@@ -1,5 +1,7 @@
 import React, {useContext} from 'react';
 import './home.css'
+import NavBar from '../NavBar/navBar';
+
 
 
 class Home extends React.Component{
@@ -18,6 +20,7 @@ class Home extends React.Component{
     render(){
         return(
             <div>
+                <NavBar/>
                 <div className="page">
                     <h1>HEY</h1>
                     
