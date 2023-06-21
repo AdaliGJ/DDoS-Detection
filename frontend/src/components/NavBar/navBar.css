@@ -12,7 +12,7 @@
     min-width: fit-content;
 }
 
-.navButton {
+#navButton {
     color: #ffffff;
     min-width: fit-content;
     width: 8vw;
@@ -23,7 +23,7 @@
     border-radius: 10%;
 }
 
-.navButton:hover {
+#navButton:hover {
     cursor: pointer;
     color: #ffffff;
     background-color: #1d1820

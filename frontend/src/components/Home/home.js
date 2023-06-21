@@ -1,33 +1,16 @@
-import React, {useContext} from 'react';
-import './home.css'
-import NavBar from '../NavBar/navBar';
+// Home.js
+import React, { useEffect } from 'react';
 
+function Home() {
+  useEffect(() => {
+    // ComponentDidMount logic here
+  }, []);
 
-
-class Home extends React.Component{
-    
-    state = {
-        dpi_usuario: null,
-        tipo_usuario: null,
-        baseUrl: 'http://localhost/webimages/'
-    };
-    
-    componentDidMount(){
-        
-        
-    }
-    
-    render(){
-        return(
-            <div>
-                <NavBar/>
-                <div className="page">
-                    <h1>HEY</h1>
-                    
-                </div>
-            </div>
-        );
-    }
+  return (
+    <div>
+      <h1>Welcome to the Home Page!</h1>
+    </div>
+  );
 }
 
 export default Home;

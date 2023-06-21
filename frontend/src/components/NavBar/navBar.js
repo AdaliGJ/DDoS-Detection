@@ -50,10 +50,10 @@ const [session, setSession] = useState();
           </Typography>
           {session?
           <ButtonGroup variant="contained" id="appbar_button">
-            <Button class="navButton">Inicio</Button>
-            <Button class="navButton" >Usuarios</Button>
-            <Button class="navButton">Registro</Button>
-            <Button class="navButton" >
+            <Button id="navButton">Inicio</Button>
+            <Button id="navButton" >Usuarios</Button>
+            <Button id="navButton">Registro</Button>
+            <Button id="navButton" >
                 <MeetingRoomIcon/>
             </Button >
         </ButtonGroup>:
