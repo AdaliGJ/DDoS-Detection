@@ -10,17 +10,46 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { InputAdornment } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 
+import axios from 'axios'
 
 
-function Login() {
+
+
+function Login(props) {
+
+
+axios.defaults.xsrfCookieName = 'crsftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRDToken';
+axios.defaults.withCredentials = true;
+    
+
+ const client = axios.create({
+    baseURL: "http://127.0.0.1:8000"
+  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    client.post(
+        "api/login",
+        {
+            email: data.get("email"),
+            password: data.get("password"),
+        }
+    ).then(function(res) {
+        console.log({
+            email: data.get("email"),
+            password: data.get("password"),
+            res
+        });
+        props.setSession(true);
+    }).catch((res)=>{
+        console.log(res);
+    });;
+    
   };
+
+  
 
   return (
     <div>

@@ -19,15 +19,25 @@ const client = axios.create({
 
 function App() {
 
+  
+
+
   const [session, setSession] = useState();
+
+  const handleSessionChange = (newValue) => {
+    setSession(newValue);
+  };
 
   useEffect(() => {
     client.get("/api/user")
     .then(function(res) {
       setSession(true);
+      console.log(res);
     })
     .catch(function(error) {
       setSession(false);
+      console.log(error);
+
     });
   }, []);
 
@@ -39,11 +49,13 @@ function App() {
         
         {session ? 
         <Switch> 
-            <Route exact path="/home" component={Home}/>
+            <Route exact path="/home" 
+            render={(props) => <Home {...props} setSession={handleSessionChange} />}/>
             <Redirect path="/" to="/home"></Redirect>
           </Switch>:
           <Switch> 
-            <Route exact path="/login" component={Login}/>
+            <Route exact path="/login"
+            render={(props) => <Login {...props} setSession={handleSessionChange} />}/>
             <Redirect path="/" to="/login"></Redirect>
           </Switch>}
       </div>
