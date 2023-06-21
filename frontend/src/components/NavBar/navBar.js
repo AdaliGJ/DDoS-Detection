@@ -20,7 +20,6 @@ function NavBar() {
         <Typography
             variant="h6"
             sx={{
-              mr: 2,
               fontFamily: 'monospace',
               fontWeight: 700,
               color: 'inherit',
