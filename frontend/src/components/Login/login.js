@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './login.css'
-import NavBar from '../NavBar/navBar';
+//import NavBar from '../NavBar/navBar';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
