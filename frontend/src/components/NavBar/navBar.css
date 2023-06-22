@@ -4,12 +4,14 @@
     margin-left: auto;
     float: none;
     border-radius: 15%;
+    
 }
 
 #appbar{
     color: #ffffff;
     background-color: #120e15;
     min-width: fit-content;
+    overflow-x: scroll;
 }
 
 #navButton {
@@ -19,7 +21,7 @@
     height: 6vh;
     background-color: #120e15;
     border: none;
-    font-size: medium;
+    font-size: small;
     border-radius: 10%;
 }
 
@@ -38,7 +40,7 @@
     color: #0ab200;
     background-color: transparent;
     border-color: #230043;
-    font-size: 0.8vw;
+    
 }
 
 #noout, #silog{
