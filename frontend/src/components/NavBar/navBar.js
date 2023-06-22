@@ -37,7 +37,7 @@ const [session, setSession] = useState();
     .catch(function(error) {
       setSession(false);
     });
-  }, []);
+  });
 
 
   return (
