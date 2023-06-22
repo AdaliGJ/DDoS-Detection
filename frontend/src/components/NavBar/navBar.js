@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { ButtonGroup } from '@mui/material';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import { Link } from 'react-router-dom';
+
+
 import './navBar.css'
 
 
@@ -27,6 +30,10 @@ const [session, setSession] = useState();
   const logout = () =>{
     client.post('/api/logout')
     window.location.reload(false);
+  }
+
+  const users = () =>{
+    window.location.href = '/users';
   }
 
   useEffect(() => {
@@ -58,7 +65,7 @@ const [session, setSession] = useState();
           {session?
           <ButtonGroup variant="contained" id="appbar_button">
             <Button id="navButton">Inicio</Button>
-            <Button id="navButton" >Usuarios</Button>
+            <Button id="navButton" onClick={users}>Usuarios</Button>
             <Button id="navButton">Registro</Button>
             <Button id="navButton" onClick={logout} >
                 <MeetingRoomIcon/>

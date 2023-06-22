@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import Login from './components/Login/login';
 import NavBar from './components/NavBar/navBar';
 import Home from './components/Home/home';
+import Users from './components/Users/users';
 
 axios.defaults.xsrfCookieName = 'crsftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -45,6 +46,7 @@ function App() {
         <NavBar />
         {session ? (
           <Switch>
+            <Route exact path="/users" component={Users}/>
             <Route exact path="/home" render={(props) => <Home {...props} setSession={handleSessionChange} />} />
             <Redirect to="/home" />
           </Switch>
