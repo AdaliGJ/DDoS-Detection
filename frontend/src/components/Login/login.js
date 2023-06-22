@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import './login.css'
 import NavBar from '../NavBar/navBar';
 import Button from "@mui/material/Button";
@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { InputAdornment } from '@mui/material';
+import { Alert, InputAdornment } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 
 import axios from 'axios'
@@ -21,6 +21,11 @@ function Login(props) {
 axios.defaults.xsrfCookieName = 'crsftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRDToken';
 axios.defaults.withCredentials = true;
+
+
+const [campoVacio, setCampoVacio] = useState(false);
+const [error, setError] = useState(false);
+
     
 
  const client = axios.create({
@@ -30,8 +35,15 @@ axios.defaults.withCredentials = true;
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
-    client.post(
+
+    if (data.get("email")==='' || data.get("password")==='') {
+      setCampoVacio(true);
+    } else {
+      setCampoVacio(false);
+
+      client.post(
         "api/login",
         {
             email: data.get("email"),
@@ -43,11 +55,14 @@ axios.defaults.withCredentials = true;
             password: data.get("password"),
             res
         });
+        setError(false);
         props.setSession(true);
         window.location.reload(false);
     }).catch((res)=>{
         console.log(res);
-    });;
+        setError(true);
+    });
+    }
     
   };
 
@@ -104,6 +119,8 @@ axios.defaults.withCredentials = true;
                     ),
                   }}
             />
+            {campoVacio?<Alert id="campoVacio" severity="error">Por favor llena todos los campos</Alert>:null}
+            {error?<Alert id="campoVacio" severity="error">Usuario o Contraseña incorrectos</Alert>:null}
             <Button
                 type="submit"
                 fullWidth
