@@ -44,6 +44,7 @@ axios.defaults.withCredentials = true;
             res
         });
         props.setSession(true);
+        window.location.reload(false);
     }).catch((res)=>{
         console.log(res);
     });;
@@ -54,7 +55,6 @@ axios.defaults.withCredentials = true;
 
   return (
     <div>
-        <NavBar/>
         <Container component="main" maxWidth="xs">
         <Box
             sx={{  

@@ -8,19 +8,26 @@ import { ButtonGroup } from '@mui/material';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import './navBar.css'
 
+
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 
 
 
 
-function NavBar() {
+function NavBar(props) {
 
 const [session, setSession] = useState();
+
 
   const client = axios.create({
     baseURL: "http://127.0.0.1:8000"
   });
+
+  const logout = () =>{
+    client.post('/api/logout')
+    window.location.reload(false);
+  }
 
   useEffect(() => {
     client.get("/api/user")
@@ -53,7 +60,7 @@ const [session, setSession] = useState();
             <Button id="navButton">Inicio</Button>
             <Button id="navButton" >Usuarios</Button>
             <Button id="navButton">Registro</Button>
-            <Button id="navButton" >
+            <Button id="navButton" onClick={logout} >
                 <MeetingRoomIcon/>
             </Button >
         </ButtonGroup>:

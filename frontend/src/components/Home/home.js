@@ -1,10 +1,21 @@
 // Home.js
 import React, { useEffect } from 'react';
+import axios from 'axios'
 
-function Home() {
-  useEffect(() => {
-    // ComponentDidMount logic here
-  }, []);
+function Home(props) {
+
+    axios.defaults.xsrfCookieName = 'crsftoken';
+    axios.defaults.xsrfHeaderName = 'X-CSRDToken';
+    axios.defaults.withCredentials = true;
+    
+
+ const client = axios.create({
+    baseURL: "http://127.0.0.1:8000",
+    withCredentials: true
+  });
+
+
+  
 
   return (
     <div>
