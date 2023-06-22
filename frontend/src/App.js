@@ -1,3 +1,4 @@
+// App.js
 import './App.css';
 import axios from 'axios';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
@@ -17,7 +18,10 @@ const client = axios.create({
 
 function App() {
   const [session, setSession] = useState(null);
-  const [loading, setLoading] = useState(true);
+
+  const handleSessionChange = (newValue) => {
+    setSession(newValue);
+  };
 
   useEffect(() => {
     client.get('/api/user')
@@ -28,37 +32,28 @@ function App() {
       .catch(function (error) {
         setSession(false);
         console.log(error);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   }, []);
 
-  if (loading) {
-    return null; // Render nothing until the session status is determined
+  if (session === null) {
+    return null;
   }
 
   return (
     <Router>
       <div className="App">
         <NavBar />
-        <Switch>
-          <Route
-            exact
-            path="/home"
-            render={(props) =>
-              session ? <Home {...props} setSession={setSession} /> : <Redirect to="/login" />
-            }
-          />
-          <Route
-            exact
-            path="/login"
-            render={(props) =>
-              !session ? <Login {...props} setSession={setSession} /> : <Redirect to="/home" />
-            }
-          />
-          {/* Add more routes here */}
-        </Switch>
+        {session ? (
+          <Switch>
+            <Route exact path="/home" render={(props) => <Home {...props} setSession={handleSessionChange} />} />
+            <Redirect to="/home" />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/login" render={(props) => <Login {...props} setSession={handleSessionChange} />} />
+            <Redirect to="/login" />
+          </Switch>
+        )}
       </div>
     </Router>
   );
