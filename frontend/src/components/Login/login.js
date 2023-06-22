@@ -111,7 +111,7 @@ axios.defaults.withCredentials = true;
                 sx={{ mt: 5, mb: 2 }}
                 id = "loginButton"
             >
-                Log In
+                Iniciar Sesión
             </Button>
             </Box>
         </Box>
