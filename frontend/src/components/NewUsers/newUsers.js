@@ -27,12 +27,13 @@ axios.defaults.withCredentials = true;
 
 const [campoVacio, setCampoVacio] = useState(false);
 const [error, setError] = useState(false);
+const [shortPasword, setShortPassword] = useState(false);
 
     
 
  const client = axios.create({
     baseURL: "http://127.0.0.1:8000",
-    withCredentials: true
+    withCredentials: false       
   });
 
   const handleSubmit = (event) => {
@@ -42,14 +43,23 @@ const [error, setError] = useState(false);
 
     if (data.get("email")==='' || data.get("password")==='' || data.get("user")=='') {
       setCampoVacio(true);
-    } else {
-      setCampoVacio(false);
+      setShortPassword(false);
+      console.log(event.currentTarget);
 
+    } else if(data.get("password").length < 10){
+      setCampoVacio(false);
+      setShortPassword(true);
+      console.log(event.currentTarget.email);
+    }
+    else {
+      setCampoVacio(false);
+      setShortPassword(false);
       client.post(
-        "api/login",
+        "api/signup",
         {
             email: data.get("email"),
             password: data.get("password"),
+            username: data.get("user"), 
         }
     ).then(function(res) {
         console.log({
@@ -58,8 +68,8 @@ const [error, setError] = useState(false);
             res
         });
         setError(false);
-        props.setSession(true);
-        window.location.reload(false);
+        //props.setSession(true);
+        //window.location.reload(false);
     }).catch((res)=>{
         console.log(res);
         setError(true);
@@ -140,7 +150,8 @@ const [error, setError] = useState(false);
                   }}
             />
             {campoVacio?<Alert id="campoVacio" severity="error">Por favor llena todos los campos</Alert>:null}
-            {error?<Alert id="campoVacio" severity="error">Usuario o Contraseña incorrectos</Alert>:null}
+            {error?<Alert id="campoVacio" severity="error">Este usuario ya existe</Alert>:null}
+            {shortPasword?<Alert id="campoVacio" severity="error">La contraseña debe contener al menos 10 caracteres</Alert>:null}
             <Button
                 type="submit"
                 fullWidth

@@ -36,6 +36,10 @@ const [session, setSession] = useState();
     window.location.href = '/users';
   }
 
+  const home = () =>{
+    window.location.href = '/home';
+  }
+
   useEffect(() => {
     client.get("/api/user")
     .then(function(res) {
@@ -64,7 +68,7 @@ const [session, setSession] = useState();
           </Typography>
           {session?
           <ButtonGroup variant="contained" id="appbar_button">
-            <Button id="navButton">Inicio</Button>
+            <Button id="navButton" onClick={home}>Inicio</Button>
             <Button id="navButton" onClick={users}>Usuarios</Button>
             <Button id="navButton">Registro</Button>
             <Button id="navButton" onClick={logout} >

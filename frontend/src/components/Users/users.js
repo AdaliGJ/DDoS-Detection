@@ -79,23 +79,24 @@ function Users() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell align="center" colSpan={2}>
-                Country
-              </TableCell>
-              <TableCell align="center" colSpan={3}>
-                Details
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              {columns.map((column) => (
                 <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ top: 57, minWidth: column.minWidth }}
+                  align={'center'}
+                  style={{ top: 57, minWidth: 'fit-content' }}
                 >
-                  {column.label}
+                  ID
                 </TableCell>
-              ))}
+                <TableCell
+                  align={'center'}
+                  style={{ top: 57, minWidth: 'fit-content' }}
+                >
+                  Usuario
+                </TableCell>
+                <TableCell
+                  align={'center'}
+                  style={{ top: 57, minWidth: 'fit-content' }}
+                >
+                  Correo
+                </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
