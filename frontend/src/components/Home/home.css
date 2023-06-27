@@ -1,3 +1,26 @@
 h1{
     color: black;
 }
+
+.graphs{
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+    background-color: aqua;
+    margin-bottom: 2vh;    
+    height: 42vh;
+    margin-right: 2vw;
+    margin-top: 2vh;
+}
+
+.side{
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+    background-color: aqua;
+    margin-bottom: 2vh;    
+    height: 86vh;
+    margin-left: 2vw;
+    margin-top: 2vh;
+
+}
