@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import { ButtonGroup } from '@mui/material';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import { Link } from 'react-router-dom';
+import {Avatar} from '@mui/material';
 
 
 import './navBar.css'
@@ -55,6 +56,7 @@ const [session, setSession] = useState();
     <Box sx={{ flexGrow: 1 }}>
       <AppBar id="appbar" position="static">
         <Toolbar>
+        <Avatar className='logoNav' alt="Logo" src={process.env.PUBLIC_URL + '/icon2.png'} />
         <Typography
             variant="h6"
             sx={{

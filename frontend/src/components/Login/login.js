@@ -9,6 +9,8 @@ import Container from "@mui/material/Container";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Alert, InputAdornment } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
+import {Avatar} from '@mui/material';
+//import '../../../public'
 
 import axios from 'axios'
 
@@ -82,6 +84,7 @@ const [error, setError] = useState(false);
             <Typography component="h1" variant="h5">
                 Login
             </Typography>
+            <img className='logo' src={process.env.PUBLIC_URL + '/icon2.png'} />
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
             <TextField
                 margin="normal"
