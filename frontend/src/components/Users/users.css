@@ -1,0 +1,39 @@
+.users-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    overflow: scroll;
+  }
+
+  .table-container::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+
+  .users-container::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+  
+  .centered-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-container {
+    /*padding: 16px;*/
+  }
+  
+  .table-container {
+    margin-top: 5vh;
+    width: 70%;
+    margin-right: 3vw;
+  }
+
+  .table-header {
+    background-color: #120e15; 
+    color: white
+  }

@@ -7,130 +7,140 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import './users.css'
 
 import NewUser from '../NewUsers/newUsers';
+import { Typography } from '@mui/material';
 
-const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-  {
-    id: 'population',
-    label: 'Population',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
-  },
-  {
-    id: 'density',
-    label: 'Density',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
-];
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
 
-const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
-];
+
 
 function Users() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+
+  const client = axios.create({
+    baseURL: 'http://127.0.0.1:8000',
+  });
+
+  function formatDateTime(dateTimeString) {
+    const dateTime = new Date(dateTimeString);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: false,
+    };
+    return dateTime.toLocaleString('es-ES', options);
+  }
+
+
+  const [usuarios, setUsuarios] = useState([])
+  const [totalUsers, setTotalUsers] = useState(0);
+  //const [date, setDate] = useState(formatDateTime('2023-06-26T19:14:51.883333Z'));
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
+
+  useEffect(() => {
+    client.get('/api/allUsers')
+      .then(function (res) {
+        setUsuarios(res.data.users)
+        setTotalUsers(res.data.users.length);
+        console.log(res.data.users);
+      })
+      .catch(function (error) {
+        
+        console.log(error);
+      });
+
+      //console.log(date)
+  }, []);
+
   return (
-    <Paper sx={{ width: '100%' }}>
-      <NewUser/>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-                <TableCell
-                  align={'center'}
-                  style={{ top: 57, minWidth: 'fit-content' }}
-                >
-                  ID
-                </TableCell>
-                <TableCell
-                  align={'center'}
-                  style={{ top: 57, minWidth: 'fit-content' }}
-                >
-                  Usuario
-                </TableCell>
-                <TableCell
-                  align={'center'}
-                  style={{ top: 57, minWidth: 'fit-content' }}
-                >
-                  Correo
-                </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <div className="users-container">
+      <div className="form-container">
+        <NewUser />
+      </div>
+      <Paper className="table-container" sx={{ width: '100%' }}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Typography component="h1" variant="h5">
+              Usuarios del Sistema
+          </Typography>
+          <Table >
+            <TableHead>
+              <TableRow>
+                  <TableCell
+                    align={'center'}
+                    className="table-header"
+                    style={{ top: 57, minWidth: 'fit-content' }}
+                  >
+                    ID
+                  </TableCell>
+                  <TableCell
+                    align={'center'}
+                    className="table-header"
+                    style={{ top: 57, minWidth: 'fit-content' }}
+                  >
+                    Usuario
+                  </TableCell>
+                  <TableCell
+                    align={'center'}
+                    className="table-header"
+                    style={{ top: 57, minWidth: 'fit-content' }}
+                  >
+                    Correo
+                  </TableCell>
+                  <TableCell
+                    align={'center'}
+                    className="table-header"
+                    style={{ top: 57, minWidth: 'fit-content' }}
+                  >
+                    Último Inicio de Sesión
+                  </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {usuarios
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((usuario) => {
+                  return (
+                    <TableRow key={usuario.user_id}>
+                      <TableCell align="right">{usuario.user_id}</TableCell>
+                      <TableCell align="right">{usuario.username}</TableCell>
+                      <TableCell align="right">{usuario.email}</TableCell>
+                      <TableCell align="right">{usuario.last_login?formatDateTime(usuario.last_login):"Nunca"}</TableCell>
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={totalUsers}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+    </div>
   );
 }
 
