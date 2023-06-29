@@ -32,10 +32,12 @@ function Home(props) {
   
 
   return (
-    <div>
+    <div className="home">
       <Grid container spacing={2}>
         <Grid item xs={3}>
-          <div className='side'>Hey</div>
+          <div className='side'>
+            <img className='logo2' src={process.env.PUBLIC_URL + '/icon.png'} />
+          </div>
         </Grid>
         <Grid item xs={9}>
           <Grid item xs={12}>

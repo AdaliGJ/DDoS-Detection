@@ -16,6 +16,8 @@
     background-color: #120e15;
     min-width: fit-content;
     overflow-x: scroll;
+    min-height: fit-content;
+    position: relative;
 }
 
 #navButton {

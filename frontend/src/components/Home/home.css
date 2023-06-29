@@ -2,11 +2,17 @@ h1{
     color: black;
 }
 
+.home{
+    background-position:bottom;
+    background-color: aqua;
+    background-attachment: fixed;
+}
+
 .graphs{
     border: 1px;
     border-color: black;
     border-style: solid;
-    background-color: aqua;
+    background-color: white;
     margin-bottom: 2vh;    
     height: 42vh;
     margin-right: 2vw;
@@ -17,10 +23,15 @@ h1{
     border: 1px;
     border-color: black;
     border-style: solid;
-    background-color: aqua;
+    background-color: white;
     margin-bottom: 2vh;    
     height: 86vh;
     margin-left: 2vw;
     margin-top: 2vh;
 
+}
+
+.logo2{
+    width: 75%;
+    
 }
