@@ -4,31 +4,38 @@ h1{
 
 .home{
     background-position:bottom;
-    background-color: aqua;
+    /*background-color: rgba(0, 255, 255, 0.185);*/
     background-attachment: fixed;
+    background: linear-gradient(0deg, rgba(59, 21, 57, 0.322) 0%, #120e1518 50%, rgba(7, 114, 82, 0.322) 100%);
+
 }
 
 .graphs{
-    border: 1px;
-    border-color: black;
+    border: 0.5px;
+    border-color: rgba(0, 0, 0, 0.055);
     border-style: solid;
     background-color: white;
     margin-bottom: 2vh;    
     height: 42vh;
     margin-right: 2vw;
     margin-top: 2vh;
+    box-shadow: 20px 20px 30px -20px rgba(5, 1, 1, 0.85);
+    border-radius: 33px;
+    /*background: linear-gradient(0deg, white 20%, #120e1518 50%, rgb(255, 255, 255) 80%);*/
 }
 
 .side{
-    border: 1px;
-    border-color: black;
+    border: 0.5px;
+    border-color: rgba(0, 0, 0, 0.055);
     border-style: solid;
     background-color: white;
     margin-bottom: 2vh;    
     height: 86vh;
     margin-left: 2vw;
     margin-top: 2vh;
-
+    box-shadow: 20px 20px 30px -20px rgba(5, 1, 1, 0.8);
+    border-radius: 33px;
+    /*background: linear-gradient(0deg, white 20%, #120e1518 50%, rgb(255, 255, 255) 80%);*/
 }
 
 .logo2{

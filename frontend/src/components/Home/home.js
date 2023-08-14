@@ -5,15 +5,6 @@ import axios from 'axios';
 import './home.css'
 
 
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
 function Home(props) {
@@ -36,7 +27,7 @@ function Home(props) {
       <Grid container spacing={2}>
         <Grid item xs={3}>
           <div className='side'>
-            <img className='logo2' src={process.env.PUBLIC_URL + '/icon.png'} />
+            <img alt="Logo" className='logo2' src={process.env.PUBLIC_URL + '/icon.png'} />
           </div>
         </Grid>
         <Grid item xs={9}>
