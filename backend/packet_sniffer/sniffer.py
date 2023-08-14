@@ -128,4 +128,4 @@ def start_sniffing():
     sniff(filter='ip', prn=packet_capture_callback)
 
 # Empezar captura
-start_sniffing()
+#start_sniffing()
