@@ -6,6 +6,7 @@ import './home.css'
 
 
 import Grid from '@mui/material/Grid';
+import DataTable from '../DataTable/dataTable';
 
 function Home(props) {
 
@@ -35,7 +36,9 @@ function Home(props) {
             <div className='graphs'>Hey</div>
           </Grid>
         <Grid item xs={12}>
-          <div className='graphs'>Hey</div>
+          <div className='graphs'>
+            <DataTable/>
+          </div>
         </Grid>
         </Grid>
       </Grid>

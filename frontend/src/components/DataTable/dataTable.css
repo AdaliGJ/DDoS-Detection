@@ -1,0 +1,7 @@
+.packet-container{
+    margin: 1vw;
+}
+
+.tabla-packet, #header{
+    border-radius: 20%;
+}

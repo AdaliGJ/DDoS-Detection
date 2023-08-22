@@ -87,28 +87,28 @@ function Users() {
                   <TableCell
                     align={'center'}
                     className="table-header"
-                    style={{ top: 57, minWidth: 'fit-content' }}
+                    style={{ top: 57, minWidth: 'fit-content', color: 'white' }}
                   >
                     ID
                   </TableCell>
                   <TableCell
                     align={'center'}
                     className="table-header"
-                    style={{ top: 57, minWidth: 'fit-content' }}
+                    style={{ top: 57, minWidth: 'fit-content', color: 'white' }}
                   >
                     Usuario
                   </TableCell>
                   <TableCell
                     align={'center'}
                     className="table-header"
-                    style={{ top: 57, minWidth: 'fit-content' }}
+                    style={{ top: 57, minWidth: 'fit-content', color: 'white' }}
                   >
                     Correo
                   </TableCell>
                   <TableCell
                     align={'center'}
                     className="table-header"
-                    style={{ top: 57, minWidth: 'fit-content' }}
+                    style={{ top: 57, minWidth: 'fit-content', color: 'white' }}
                   >
                     Último Inicio de Sesión
                   </TableCell>
