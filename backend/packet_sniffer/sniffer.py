@@ -2,6 +2,9 @@ from scapy.all import sniff
 from packet_sniffer.models import Packet
 import statistics
 
+from django.http import JsonResponse
+from threading import Thread
+
 #def packet_capture_callback(packet):
     #if packet.haslayer('IP'):
         #source_ip = packet['IP'].src
@@ -37,7 +40,13 @@ def packet_capture_callback(packet):
     global flow_start_time, flow_packet_lengths, ack_flag_count, last_destination_port, subflow_fwd_packets, init_win_bytes_forward, min_seg_size_forward, last_fwd_packet_time, fwd_iat_list
     
     if packet.haslayer('IP'):
-        destination_port = packet['IP'].dport if packet.haslayer('IP') else 0        
+        if packet.haslayer('TCP'):
+                destination_port = packet['TCP'].dport
+        elif packet.haslayer('UDP'):
+            destination_port = packet['UDP'].dport
+        else:
+            destination_port = 0 
+        #destination_port = packet['IP'].dport if packet.haslayer('IP') else 0        
         protocol = packet['IP'].proto
         packet_length = len(packet)
         
@@ -124,8 +133,28 @@ def packet_capture_callback(packet):
         )
         packet_instance.save()
 
+
+stop_capture = False
+
 def start_sniffing():
-    sniff(filter='ip', prn=packet_capture_callback)
+    global stop_capture
+    stop_capture = False  
+    
+    while not stop_capture:
+        sniff(filter='ip', prn=packet_capture_callback)
 
 # Empezar captura
 #start_sniffing()
+
+
+
+def start_packet_capture(request):
+    capture_thread = Thread(target=start_sniffing)
+    capture_thread.start()
+
+    return JsonResponse({"message": "Packet capture started"})
+
+def stop_packet_capture(request):
+    global stop_capture
+    stop_capture = True
+    return JsonResponse({"message": "Packet capture stopped"})

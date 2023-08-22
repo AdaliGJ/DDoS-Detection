@@ -83,7 +83,7 @@ function Users() {
           </Typography>
           <Table >
             <TableHead>
-              <TableRow>
+              <TableRow id="header">
                   <TableCell
                     align={'center'}
                     className="table-header"
