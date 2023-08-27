@@ -38,6 +38,7 @@ class Packet(models.Model):
     subflow_fwd_packets = models.IntegerField(default=0)
     init_win_bytes_forward = models.IntegerField(default=0)
     min_seg_size_forward = models.IntegerField(default=0)
+    classification = models.CharField(max_length=50,default='')
 
     def __str__(self):
         return f'Destination Port: {self.destination_port}, Protocol: {self.protocol}'

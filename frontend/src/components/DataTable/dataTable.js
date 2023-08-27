@@ -65,9 +65,9 @@ function DataTable() {
           <Table className='tabla-packet'
           style={{
             width: '100%',
-            borderCollapse: 'collapse',  // Collapse borders for spacing
-            borderRadius: '15px',        // Add rounded corners to the table
-            overflow: 'hidden'           // Hide overflow outside the rounded corners
+            borderCollapse: 'collapse', 
+            borderRadius: '15px',        
+            overflow: 'hidden'           
           }} >
             <TableHead>
               <TableRow >

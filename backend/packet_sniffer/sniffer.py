@@ -5,6 +5,20 @@ import statistics
 from django.http import JsonResponse
 from threading import Thread
 
+import joblib
+
+
+import sys
+import os
+
+
+#Cargar el Modelo
+model_folder_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'Model'))
+sys.path.append(model_folder_path)
+model_path = os.path.join(model_folder_path, 'DDoSClassifierModel.pkl')
+loaded_model = joblib.load(model_path)
+
+
 #def packet_capture_callback(packet):
     #if packet.haslayer('IP'):
         #source_ip = packet['IP'].src
@@ -106,6 +120,21 @@ def packet_capture_callback(packet):
             fwd_iat_list.append(fwd_iat)
         
         last_fwd_packet_time = packet.time
+
+
+    
+
+       # packet_features = [
+        #    destination_port, protocol, flow_duration, fwd_packet_length_max,
+         #   fwd_packet_length_min, fwd_packet_length_std, flow_iat_mean,
+          #  flow_iat_max, fwd_iat_mean, fwd_iat_max, fwd_iat_min,
+           # fwd_header_length, fwd_packets_per_sec, min_packet_length,
+            #max_packet_length, packet_length_std, ack_flag_count,
+            #average_packet_size, fwd_header_length_1, subflow_fwd_packets,
+            #init_win_bytes_forward, min_seg_size_forward
+        #]
+
+        #classification = loaded_model.predict([2])
         
         # Crear y guardar instancia de paquetes
         packet_instance = Packet(
