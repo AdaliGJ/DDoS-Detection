@@ -192,7 +192,7 @@ def packet_capture_callback(packet):
                 flow_iat_max, fwd_iat_mean, fwd_iat_max, fwd_iat_min,
                 fwd_header_length, fwd_packets_per_sec, min(flow_packet_lengths),
                 max(flow_packet_lengths), statistics.stdev(flow_packet_lengths) if len(flow_packet_lengths) >= 2 else 0.0, ack_flag_count,
-                average_packet_size, packet['IP'].ihl * 32, 1,
+                average_packet_size, packet['IP'].ihl * 32, subflow_fwd_packets,
                 init_win_bytes_forward.get(destination_port, 0), min_seg_size_forward.get(destination_port, 0)
             ]])[0]
         )
