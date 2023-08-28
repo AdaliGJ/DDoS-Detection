@@ -50,19 +50,35 @@ min_seg_size_forward = {}
 last_fwd_packet_time = None  # Tener el tiempo del último paquete enviado
 fwd_iat_list = []  # Guardar tiempos entre llegada
 
+fwd_header_length = 0
+
+total_packet_length = 0
+total_packets = 0
+
+
 def packet_capture_callback(packet):
-    global flow_start_time, flow_packet_lengths, ack_flag_count, last_destination_port, subflow_fwd_packets, init_win_bytes_forward, min_seg_size_forward, last_fwd_packet_time, fwd_iat_list
+    global total_packet_length, total_packets, flow_start_time, flow_packet_lengths, ack_flag_count, last_destination_port, subflow_fwd_packets, init_win_bytes_forward, min_seg_size_forward, last_fwd_packet_time, fwd_iat_list, fwd_header_length
     
+    total_packet_length += len(packet)
+    total_packets+=1
+
+    average_packet_size=total_packet_length/total_packets
+
+    header_length = 0
+
     if packet.haslayer('IP'):
         if packet.haslayer('TCP'):
                 destination_port = packet['TCP'].dport
+                header_length = packet['TCP'].dataofs * 4
         elif packet.haslayer('UDP'):
             destination_port = packet['UDP'].dport
+            header_length = 8  # UDP
         else:
             destination_port = 0 
         #destination_port = packet['IP'].dport if packet.haslayer('IP') else 0        
         protocol = packet['IP'].proto
         packet_length = len(packet)
+        fwd_header_length += header_length
         
         # Calcular duración de flujo y estadísticas longitud de paquetes
         if flow_start_time is None:
@@ -122,19 +138,28 @@ def packet_capture_callback(packet):
         last_fwd_packet_time = packet.time
 
 
+        #min_packet_length=min(flow_packet_lengths),
+        #max_packet_length=max(flow_packet_lengths),
+        #packet_length_std = statistics.stdev(flow_packet_lengths) if len(flow_packet_lengths) >= 2 else 0.0,
+        #fwd_header_length_1=packet['IP'].ihl * 32,  # Longitud IP header 
+        #subflow_fwd_packets=subflow_fwd_packets,
+        #init_win_bytes_forward=init_win_bytes_forward.get(destination_port, 0),
+        #min_seg_size_forward=min_seg_size_forward.get(destination_port, 0),
     
 
        # packet_features = [
-        #    destination_port, protocol, flow_duration, fwd_packet_length_max,
-         #   fwd_packet_length_min, fwd_packet_length_std, flow_iat_mean,
-          #  flow_iat_max, fwd_iat_mean, fwd_iat_max, fwd_iat_min,
-           # fwd_header_length, fwd_packets_per_sec, min_packet_length,
-            #max_packet_length, packet_length_std, ack_flag_count,
-            #average_packet_size, fwd_header_length_1, subflow_fwd_packets,
-            #init_win_bytes_forward, min_seg_size_forward
+         #destination_port, protocol, flow_duration, fwd_packet_length_max,
+         #fwd_packet_length_min, fwd_packet_length_std, flow_iat_mean,
+         #flow_iat_max, fwd_iat_mean, fwd_iat_max, fwd_iat_min,
+         #fwd_header_length, fwd_packets_per_sec, min_packet_length,
+         #max_packet_length, packet_length_std, ack_flag_count,
+         #average_packet_size, fwd_header_length_1, subflow_fwd_packets,
+         #init_win_bytes_forward, min_seg_size_forward
         #]
 
-        #classification = loaded_model.predict([2])
+
+
+        #classification = loaded_model.predict(packet_features)
         
         # Crear y guardar instancia de paquetes
         packet_instance = Packet(
@@ -151,7 +176,9 @@ def packet_capture_callback(packet):
             fwd_iat_min=fwd_iat_min,
             fwd_packets_per_sec=fwd_packets_per_sec,
             ack_flag_count=ack_flag_count,
-      
+            fwd_header_length = fwd_header_length,
+            average_packet_size=average_packet_size,
+
             min_packet_length=min(flow_packet_lengths),
             max_packet_length=max(flow_packet_lengths),
             packet_length_std = statistics.stdev(flow_packet_lengths) if len(flow_packet_lengths) >= 2 else 0.0,
@@ -159,8 +186,19 @@ def packet_capture_callback(packet):
             subflow_fwd_packets=subflow_fwd_packets,
             init_win_bytes_forward=init_win_bytes_forward.get(destination_port, 0),
             min_seg_size_forward=min_seg_size_forward.get(destination_port, 0),
+            classification = loaded_model.predict([[
+                destination_port, protocol, flow_duration, fwd_packet_length_max,
+                fwd_packet_length_min, fwd_packet_length_std, flow_iat_mean,
+                flow_iat_max, fwd_iat_mean, fwd_iat_max, fwd_iat_min,
+                fwd_header_length, fwd_packets_per_sec, min(flow_packet_lengths),
+                max(flow_packet_lengths), statistics.stdev(flow_packet_lengths) if len(flow_packet_lengths) >= 2 else 0.0, ack_flag_count,
+                average_packet_size, packet['IP'].ihl * 32, 1,
+                init_win_bytes_forward.get(destination_port, 0), min_seg_size_forward.get(destination_port, 0)
+            ]])[0]
         )
         packet_instance.save()
+
+        #Change subflow Forward Packets Value ---- Idea
 
 
 stop_capture = False
