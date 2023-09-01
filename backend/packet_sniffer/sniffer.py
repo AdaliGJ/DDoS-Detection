@@ -1,6 +1,8 @@
 from scapy.all import sniff
 from packet_sniffer.models import Packet
 import statistics
+from django.utils import timezone
+
 
 from django.http import JsonResponse
 from threading import Thread
@@ -79,6 +81,9 @@ def packet_capture_callback(packet):
         protocol = packet['IP'].proto
         packet_length = len(packet)
         fwd_header_length += header_length
+
+        source_ip = packet['IP'].src
+        destination_ip = packet['IP'].dst
         
         # Calcular duración de flujo y estadísticas longitud de paquetes
         if flow_start_time is None:
@@ -194,7 +199,10 @@ def packet_capture_callback(packet):
                 max(flow_packet_lengths), statistics.stdev(flow_packet_lengths) if len(flow_packet_lengths) >= 2 else 0.0, ack_flag_count,
                 average_packet_size, packet['IP'].ihl * 32, subflow_fwd_packets,
                 init_win_bytes_forward.get(destination_port, 0), min_seg_size_forward.get(destination_port, 0)
-            ]])[0]
+            ]])[0],
+            ip_source = source_ip,
+            ip_destination = destination_ip,
+            time = timezone.now()    
         )
         packet_instance.save()
 

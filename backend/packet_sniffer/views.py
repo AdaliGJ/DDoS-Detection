@@ -12,7 +12,9 @@ class PacketList(APIView):
 
 
     def get(self, request):
-        packets = Packet.objects.all()
+        #total_packets = Packet.objects.count()
+        #packets = Packet.objects.all()[total_packets - 50:]
+        packets = Packet.objects.order_by('-id')[:201]
         serializer = PacketSerializer(packets, many=True)
         return Response({'paquetes': serializer.data}, status=status.HTTP_200_OK)
 

@@ -7,6 +7,8 @@ import './home.css'
 
 import Grid from '@mui/material/Grid';
 import DataTable from '../DataTable/dataTable';
+import Button from '@mui/material/Button';
+
 
 function Home(props) {
 
@@ -29,6 +31,12 @@ function Home(props) {
         <Grid item xs={3}>
           <div className='side'>
             <img alt="Logo" className='logo2' src={process.env.PUBLIC_URL + '/icon.png'} />
+            <div className='buttonSniff'>
+              <Button id="buttonStart">Iniciar Captura</Button>
+            </div>
+            <div className='buttonSniff'>
+              <Button id="buttonStop">Detener Captura</Button>
+            </div>
           </div>
         </Grid>
         <Grid item xs={9}>

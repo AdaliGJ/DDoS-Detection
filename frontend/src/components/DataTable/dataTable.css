@@ -5,3 +5,12 @@
 .tabla-packet, #header{
     border-radius: 20%;
 }
+
+#attack{
+    color: red;
+}
+
+
+#norm{
+    color: rgb(27, 0, 100);
+}

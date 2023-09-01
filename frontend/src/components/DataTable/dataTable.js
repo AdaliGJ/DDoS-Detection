@@ -20,35 +20,36 @@ import { Typography } from '@mui/material';
 
 function DataTable() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(3);
+
 
 
   const client = axios.create({
-    baseURL: 'http://127.0.0.1:8100',
+    baseURL: 'http://127.0.0.1:8000',
   });
 
-  function formatDateTime(dateTimeString) {
-    const dateTime = new Date(dateTimeString);
-    const options = {
-     
-    };
-    return dateTime.toLocaleString('es-ES', options);
-  }
 
 
-  const [usuarios, setUsuarios] = useState([])
-  const [totalUsers, setTotalUsers] = useState(0);
+  const [paquetes, setPaquetes] = useState([])
+  const [totalPackets, setTotalPackets] = useState(0);
   //const [date, setDate] = useState(formatDateTime('2023-06-26T19:14:51.883333Z'));
 
   
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 3));
+    setPage(0);
+  };
 
   useEffect(() => {
     client.get('/packets/all')
       .then(function (res) {
-        setUsuarios(res.data.users)
-        setTotalUsers(res.data.users.length);
-        console.log(res.data.users);
+        setPaquetes(res.data.paquetes)
+        setTotalPackets(res.data.paquetes.length);
+        console.log(res.data.paquetes);
       })
       .catch(function (error) {
         
@@ -116,10 +117,33 @@ function DataTable() {
               </TableRow>
             </TableHead>
             <TableBody>
+            {paquetes
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((paquete) => {
+                  return (
+                    <TableRow key={paquete.id}>
+                      <TableCell align="right">{paquete.id}</TableCell>
+                      <TableCell align="right">{paquete.flow_duration}</TableCell>
+                      <TableCell align="right">{paquete.protocol}</TableCell>
+                      <TableCell align="right">{paquete.destination_port}</TableCell>
+                      <TableCell align="right">{paquete.protocol}</TableCell>
+                      <TableCell align="right" id={paquete.classification=="Normal"?"norm":"attack"}>{paquete.classification}</TableCell>
+                    </TableRow>
+                  );
+                })}
               
             </TableBody>
           </Table>
         </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[3]}
+          component="div"
+          count={totalPackets}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Paper>
     </div>
   );

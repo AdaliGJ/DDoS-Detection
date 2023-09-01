@@ -43,3 +43,41 @@ h1{
     width: 75%;
     
 }
+
+#buttonStart{
+    color: #ffffff;
+    width: 15vw;
+    min-height: fit-content;
+    height: 6vh;
+    background-color: rgba(59, 21, 57);
+    border: none;
+    font-size: small;       
+    border-radius: 5%;
+}
+
+#buttonStop{
+    color: #ffffff;
+    width: 15vw;
+    min-height: fit-content;
+    height: 6vh;
+    background-color: rgba(7, 114, 82);
+    border: none;
+    font-size: small;       
+    border-radius: 5%;
+}
+
+#buttonStart:hover {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #1d1820
+}
+
+#buttonStop:hover {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: rgb(2, 95, 67);
+}
+
+.buttonSniff{
+    padding: 1vw;
+}
