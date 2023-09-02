@@ -18,8 +18,8 @@ function TrafficChart() {
     try {
       const response = await client.get('/packets/get_attack_counts/');
       if (response.data) {
-        setPaquetesAttack(response.data.Attack);
         setPaquetesNormal(response.data.Normal);
+        setPaquetesAttack(response.data.Attack);
       }
     } catch (error) {
       console.log(error);
@@ -38,20 +38,21 @@ function TrafficChart() {
   }, []);
 
   const chartData = {
-    labels: paquetesAttack.map((entry) => entry.second),
+    labels: paquetesNormal.map((entry) => entry.second),
     datasets: [
+        {
+            label: 'Normal',
+            data: paquetesNormal.map((entry) => entry.count),
+            borderColor: 'blue',
+            fill: false,
+        },
       {
         label: 'Attacks',
         data: paquetesAttack.map((entry) => entry.count),
         borderColor: 'red',
         fill: false,
       },
-      {
-        label: 'Normal',
-        data: paquetesNormal.map((entry) => entry.count),
-        borderColor: 'blue',
-        fill: false,
-      },
+
     ],
   };
 
