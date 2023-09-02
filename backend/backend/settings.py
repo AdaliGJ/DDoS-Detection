@@ -53,8 +53,21 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'user_api.apps.UserApiConfig',
-    'packet_sniffer.apps.PacketSnifferConfig'
+    'packet_sniffer.apps.PacketSnifferConfig',
+    'channels' #Nuevo
 ]
+
+
+#Nuevooooooo
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -88,6 +101,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+ASGI_APPLICATION = "backend.asgi.application" ####################### NUEVO
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

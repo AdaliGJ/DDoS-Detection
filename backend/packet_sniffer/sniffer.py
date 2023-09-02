@@ -3,6 +3,10 @@ from packet_sniffer.models import Packet
 import statistics
 from django.utils import timezone
 
+import socket
+
+host_ip = socket.gethostbyname(socket.gethostname())
+
 
 from django.http import JsonResponse
 from threading import Thread
@@ -216,7 +220,7 @@ def start_sniffing():
     stop_capture = False  
     
     while not stop_capture:
-        sniff(filter='ip', prn=packet_capture_callback)
+        sniff(filter="ip", prn=packet_capture_callback)
 
 # Empezar captura
 #start_sniffing()
@@ -224,12 +228,15 @@ def start_sniffing():
 
 
 def start_packet_capture(request):
-    capture_thread = Thread(target=start_sniffing)
-    capture_thread.start()
+    #capture_thread = Thread(target=start_sniffing)
+    #capture_thread.start()
+
+    start_sniffing()
 
     return JsonResponse({"message": "Packet capture started"})
 
 def stop_packet_capture(request):
     global stop_capture
     stop_capture = True
+
     return JsonResponse({"message": "Packet capture stopped"})

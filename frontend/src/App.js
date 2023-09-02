@@ -8,6 +8,7 @@ import Login from './components/Login/login';
 import NavBar from './components/NavBar/navBar';
 import Home from './components/Home/home';
 import Users from './components/Users/users';
+import PacketList from './components/PruebaPacket/PacketList'; 
 
 axios.defaults.xsrfCookieName = 'crsftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';

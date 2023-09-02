@@ -8,6 +8,7 @@ import './home.css'
 import Grid from '@mui/material/Grid';
 import DataTable from '../DataTable/dataTable';
 import Button from '@mui/material/Button';
+import PacketList from '../PruebaPacket/PacketList';
 
 
 function Home(props) {
@@ -45,7 +46,7 @@ function Home(props) {
           </Grid>
         <Grid item xs={12}>
           <div className='graphs'>
-            <DataTable/>
+            <PacketList/>
           </div>
         </Grid>
         </Grid>
