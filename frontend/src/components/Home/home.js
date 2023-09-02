@@ -19,11 +19,22 @@ function Home(props) {
     axios.defaults.withCredentials = true;
     
 
- /*const client = axios.create({
+ const client = axios.create({
     baseURL: "http://127.0.0.1:8000",
     withCredentials: true
-  });*/
+  });
 
+
+  const iniciar = () =>{
+    client.get('/packets/start-capture/')
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch(function (error) {
+        
+        console.log(error);
+      });
+  }
 
   
 
@@ -34,7 +45,7 @@ function Home(props) {
           <div className='side'>
             <img alt="Logo" className='logo2' src={process.env.PUBLIC_URL + '/icon.png'} />
             <div className='buttonSniff'>
-              <Button id="buttonStart">Iniciar Captura</Button>
+              <Button id="buttonStart" onClick={iniciar}>Iniciar Captura</Button>
             </div>
             <div className='buttonSniff'>
               <Button id="buttonStop">Detener Captura</Button>
