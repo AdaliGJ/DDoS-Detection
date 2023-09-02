@@ -45,7 +45,6 @@ function PacketList() {
     }
   };
 
-  // Function to initiate long polling
   const startLongPolling = async () => {
     while (true) {
       await fetchPackets();
