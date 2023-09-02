@@ -48,7 +48,7 @@ h1{
     color: #ffffff;
     width: 15vw;
     min-height: fit-content;
-    height: 6vh;
+    padding: 3%;
     background-color: rgba(59, 21, 57);
     border: none;
     font-size: small;       
@@ -59,11 +59,12 @@ h1{
     color: #ffffff;
     width: 15vw;
     min-height: fit-content;
-    height: 6vh;
+    /*height: 6vh;*/
     background-color: rgba(7, 114, 82);
     border: none;
     font-size: small;       
     border-radius: 5%;
+    padding: 3%;
 }
 
 #buttonStart:hover {
@@ -81,3 +82,21 @@ h1{
 .buttonSniff{
     padding: 1vw;
 }
+
+.legend {
+    justify-content: space-between; 
+    margin: auto;
+    align-content: center;
+    margin-top: 3vh;
+  }
+  
+  .legend-item {
+    display: flex; 
+  }
+  
+  .colorL {
+    width: 5vw;
+    height: 1vw;
+    margin-right: 1.5vw;
+    margin-left: 4vw;
+  }

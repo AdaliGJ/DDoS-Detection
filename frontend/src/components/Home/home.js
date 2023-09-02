@@ -39,6 +39,16 @@ function Home(props) {
             <div className='buttonSniff'>
               <Button id="buttonStop">Detener Captura</Button>
             </div>
+            <div className="legend">
+              <div className="legend-item">
+                <div className="colorL" style={{ backgroundColor: 'red' }}></div>
+                Ataque
+              </div>
+              <div className="legend-item">
+                <div className="colorL" style={{ backgroundColor: 'blue' }}></div>
+                Normal
+              </div>
+            </div>
           </div>
         </Grid>
         <Grid item xs={9}>
