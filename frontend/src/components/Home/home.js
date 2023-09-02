@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import DataTable from '../DataTable/dataTable';
 import Button from '@mui/material/Button';
 import PacketList from '../PruebaPacket/PacketList';
+import TrafficChart from '../Chart/chart';
 
 
 function Home(props) {
@@ -42,7 +43,9 @@ function Home(props) {
         </Grid>
         <Grid item xs={9}>
           <Grid item xs={12}>
-            <div className='graphs'>Hey</div>
+            <div className='graphs'>
+              <TrafficChart/>
+            </div>
           </Grid>
         <Grid item xs={12}>
           <div className='graphs'>

@@ -38,7 +38,7 @@ function PacketList() {
       if (response.data.paquetes) {
         setPaquetes(response.data.paquetes);
         setTotalPackets(response.data.paquetes.length);
-        console.log(response.data.paquetes);
+        //console.log(response.data.paquetes);
       }
     } catch (error) {
       console.log(error);

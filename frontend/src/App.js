@@ -9,7 +9,8 @@ import NavBar from './components/NavBar/navBar';
 import Home from './components/Home/home';
 import Users from './components/Users/users';
 import PacketList from './components/PruebaPacket/PacketList'; 
-
+import TrafficChart from './components/Chart/chart';
+ 
 axios.defaults.xsrfCookieName = 'crsftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -48,6 +49,7 @@ function App() {
         {session ? (
           <Switch>
             <Route exact path="/users" component={Users}/>
+            <Route exact path="/chart" component={TrafficChart}/>
             <Route exact path="/home" render={(props) => <Home {...props} setSession={handleSessionChange} />} />
             <Redirect to="/home" />
           </Switch>
