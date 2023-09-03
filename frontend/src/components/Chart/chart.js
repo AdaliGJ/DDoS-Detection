@@ -7,8 +7,9 @@ import { CategoryScale, LinearScale, TimeScale, Chart, Title, Tooltip, PointElem
 Chart.register(CategoryScale, LinearScale, TimeScale, Title, Tooltip, PointElement, LineElement);
 
 function TrafficChart() {
-  const [paquetesAttack, setPaquetesAttack] = useState([]);
-  const [paquetesNormal, setPaquetesNormal] = useState([]);
+  //const [paquetesAttack, setPaquetesAttack] = useState([]);
+  //const [paquetesNormal, setPaquetesNormal] = useState([]);
+  const [paquetes, setPaquetes] = useState([]);
 
   const client = axios.create({
     baseURL: 'http://127.0.0.1:8000',
@@ -18,8 +19,9 @@ function TrafficChart() {
     try {
       const response = await client.get('/packets/get_attack_counts/');
       if (response.data) {
-        setPaquetesNormal(response.data.Normal);
-        setPaquetesAttack(response.data.Attack);
+        //setPaquetesNormal(response.data.Normal);
+        //setPaquetesAttack(response.data.Attack);
+        setPaquetes(response.data)
       }
     } catch (error) {
       console.log(error);
@@ -38,17 +40,17 @@ function TrafficChart() {
   }, []);
 
   const chartData = {
-    labels: paquetesNormal.map((entry) => entry.second),
+    labels: paquetes.map((entry) => entry.second),
     datasets: [
         {
             label: 'Normal',
-            data: paquetesNormal.map((entry) => entry.count),
+            data: paquetes.map((entry) => entry.normalCount),
             borderColor: 'blue',
             fill: false,
         },
       {
         label: 'Attacks',
-        data: paquetesAttack.map((entry) => entry.count),
+        data: paquetes.map((entry) => entry.attackCount),
         borderColor: 'red',
         fill: false,
       },
