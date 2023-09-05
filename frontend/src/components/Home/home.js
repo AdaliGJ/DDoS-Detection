@@ -47,9 +47,6 @@ function Home(props) {
             <div className='buttonSniff'>
               <Button id="buttonStart" onClick={iniciar}>Iniciar Captura</Button>
             </div>
-            <div className='buttonSniff'>
-              <Button id="buttonStop">Detener Captura</Button>
-            </div>
             <div className="legend">
               <div className="legend-item">
                 <div className="colorL" style={{ backgroundColor: 'red' }}></div>

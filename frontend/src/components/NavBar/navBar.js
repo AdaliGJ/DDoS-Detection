@@ -72,7 +72,6 @@ const [session, setSession] = useState();
           <ButtonGroup variant="contained" id="appbar_button">
             <Button id="navButton" onClick={home}>Inicio</Button>
             <Button id="navButton" onClick={users}>Usuarios</Button>
-            <Button id="navButton">Registro</Button>
             <Button id="navButton" onClick={logout} >
                 <MeetingRoomIcon/>
             </Button >
